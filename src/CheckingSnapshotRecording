@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# ********* TO CHECK THE GLOBAL SNAPSHOT RECORDING *****
+
+# Copy this excecutable file in the storage folder
+# Open a new terminal and go to the storageFolder directry
+# To get the total sum of the money in all the BankNodes write the command: 
+#     nohup ./CheckingSnapshotRecording 
+# It will create the nohup.out file which includes the total snapshot recording.
+# Open the nohup.out file using the command: 
+#     gedit nohup.out
+
+
+
+awk -F ',' \
+    '    {results[$1+0]+=$2+$3+$4} \
+     END {for (i in results) \
+              if (i != 0) \
+                  print i" , "results[i]}' *.csv \
+| sort --key=1 --field-separator=',' --numeric-sort
+
+
+
+
+
+

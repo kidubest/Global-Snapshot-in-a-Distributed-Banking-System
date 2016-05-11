@@ -1,0 +1,57 @@
+We have used java Remote Method Invocation (RMI) to implement the project, which is an equivalent of RPC for Objects in Java application. RMI allows Object functions calls between different Java Virtual Machines (JVMs). The JVMs can be located in different computer, yet they can invoke methods between each other. This communications is enabled between different Java Virtual Machines throw Objects called Stub/proxy and Skeleton.
+
+The general guideline to create RMI Application is:
+1. Define the Remote interface that extends java.rmi.Remote and defining the associated methods that will be invoked Remotely.
+2. Define the Remote Object/class that implements the Remote interface and all the methods defined in the Remote interface to be invoked      Remotely. 
+3. Create and install security manager
+4. Create instance of Remote Object
+5. Register at least one of the Remote Object with RMI remote Object 
+
+HOW TO RUN
+
+4) HOW TO RUN AND TEST
+
+1. Open terminal and change your working directory to the file location:
+     JlassiTefera/GlobalSnapshot_IN_Distributed_Banking_System/src
+
+2. Compile the Program using the command: javac ServerNode.java
+
+3. Launch the Program using the command: java ServerNode
+
+
+
+You will see the following output:
+
+ENTER COMMAND: [MethodName NodeHost nodeID existingNodeHost existingNodeID] without the bracket
+TO CREATE THE FIRST BANKNODE: createBankNode localhost 10
+TO JOIN BANKNETWORK:                   joinNetwork localhost 20 localhost 10 
+TO VIEW THE NETWORK:                    viewTopology
+TO VIEW GLOBAL SNAPSHOT:          dss
+        Print IPAddress: IP_Address
+        BANKNODE IS READ FOR REQUEST…
+
+4. To Create the first BankNode in the graph, write command: createBankNode localhost 10 
+
+5. For the second BankNode to join the Network, open a new terminal and change your working directory to the file location. Launch another ServerNode like step 3 with the command java ServerNode and then write the command: joinNetwork localhost 20 localhost 10
+
+6. For the third BankNode to join the Network and to continue building a Distributed Banking Network with a bunch of BankNodes, which will transfer random amount of money in the range between 1 - 100 among themselves, repeate step 5 with different nodeID.
+
+AS soon as the 4th BankNode joins the Network, random amount of money will be transferred between the banks.
+
+The new BankNode can join any of the existing nodes and announce itself to all the existing BankNodes. The existing BankNodes will automatically add the new node to the list of BankNodes they are aware of.
+
+7. To view the topology of the graph, enter the command: viewTopology
+
+8. To take the Distributed snapshot, enter command: dss
+
+TO CHECK THE GLOBAL SNAPSHOT RECORDING 
+
+Copy the file : CheckingSnapshotRecording from the source file to the storageFolder which is automatically created when the program runs
+Open a new terminal and go to the storageFolder directory
+To run the script and to check the total sum of the money in all the BankNodes write the command: 
+             nohup ./CheckingSnapshotRecording 
+It will create the nohup.out file which includes the total snapshot recording.
+Open the nohup.out file using the command: 
+             gedit nohup.out
+
+
